@@ -1,0 +1,39 @@
+
+<span class="sub-categories-container" *ngIf="category && category.subCategories && category.subCategories.length > 0" >
+
+<mat-card class="sub-category-container" *ngFor="let sub of category.subCategories"
+>
+<button (click)="getDeleteSubCategoryPopUp(sub)" class="btn btn-danger delete-sub-category-btn">מחק תת קטגוריה</button>
+  <mat-card-header (click)="viewSubCategory(sub)">
+
+    <h1>{{sub.name}}</h1>
+  </mat-card-header>
+  <mat-card-content (click)="viewSubCategory(sub)">
+    <h4>{{sub.description}}</h4>
+  </mat-card-content>
+</mat-card>
+</span>
+<button class="btn btn-round btn-success add-sub-category" (click)="createNewSubCategory()">הוספת תת-קטגוריה</button>
+<swal #editSub title="עריכת תת קטגוריה"  [showConfirmButton]="false"
+[showCancelButton]="false" >
+<span *swalPortal>
+  <app-single-sub-category [subCategory]="editSubCategory" (subCategorySubmited)="update($event)">
+
+  </app-single-sub-category>
+</span>
+</swal>
+<swal #newSub title="תת קטגוריה חדשה"  [showConfirmButton]="false"
+[showCancelButton]="false" >
+<span *swalPortal>
+  <app-single-sub-category  (subCategorySubmited)="add($event)">
+
+  </app-single-sub-category>
+</span>
+</swal>
+<swal #deleteSub title="מחיקת תת קטגוריה" (confirm)="remove()" [showConfirmButton]="true"
+[showCancelButton]="true" [swalOptions]="{ confirmButtonText: 'מחק',cancelButtonText:'בטל' }" >
+  <div *swalPortal class="text-center">
+    <p>בטוחים? מחיקת תת קטגוריה תמחק את כל המידע והתזכורות הקשורות אליה</p>
+  </div>
+</swal>
+

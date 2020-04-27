@@ -1,0 +1,46 @@
+<button (click)="getNewCategoryPopUp()" title="הוסף קטגוריה"
+class="btn-success btn-round btn-lg add-menu-btn" >+</button>
+<mat-list>
+  <mat-list-item  *ngFor="let category of categories"
+  (click)="displayCategory(category)"
+  [class.active]="currentCategory.id === category.id"
+  class="category-item" (contextmenu)="onContextMenu($event, category)">
+		{{ category.name }}
+	</mat-list-item>
+</mat-list>
+<swal #addCategorySwal title="הוספת קטגוריה" (confirm)="add()" (cancel)="clearCategory()" [showConfirmButton]="true"
+[showCancelButton]="true" [swalOptions]="{ confirmButtonText: 'הוספה',cancelButtonText:'בטל' }" >
+  <div *swalPortal class="text-center">
+    <mat-form-field>
+      <mat-label>שם הקטגוריה</mat-label>
+    <input matInput [(ngModel)]="newCategory.name"/>
+  </mat-form-field>
+  </div>
+</swal>
+<swal #updateCategorySwal title="עריכת קטגוריה" (confirm)="update()" (cancel)="clearCategory()" [showConfirmButton]="true"
+[showCancelButton]="true" [swalOptions]="{ confirmButtonText: 'עריכה',cancelButtonText:'בטל' }" >
+  <div *swalPortal class="text-center">
+    <mat-form-field>
+      <mat-label>שם הקטגוריה</mat-label>
+    <input matInput [(ngModel)]="editCategory.name"/>
+  </mat-form-field>
+  </div>
+</swal>
+<swal #deleteCategorySwal title="מחיקת קטגוריה" (confirm)="delete()" (cancel)="clearCategory()" [showConfirmButton]="true"
+[showCancelButton]="true" [swalOptions]="{ confirmButtonText: 'מחק',cancelButtonText:'בטל' }" >
+  <div *swalPortal class="text-center">
+    <p>בטוחים? מחיקת קטגוריה תמחק את כל תתי הקטגוריה</p>
+  </div>
+</swal>
+<ng-template  #contextMenu let-category>
+  <section  [class.category-menu]="category">
+    <mat-list class="pt-0">
+      <mat-list-item  class="item btn-info btn-round" (click)="getUpdateCategoryPopUp(category)">
+        עדכן
+      </mat-list-item>
+      <mat-list-item  class="item btn-danger btn-round" (click)="getDeleteCategoryPopUp(category)">
+        מחק
+      </mat-list-item>
+    </mat-list>
+  </section>
+</ng-template>

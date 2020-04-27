@@ -1,0 +1,16 @@
+<app-msg *ngIf="msg" [msg]="msg"></app-msg>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" [(opened)]="opened" [mode]="'over'">
+    <app-categories (displayMsg)="displayMsg($event)" (displaySubCategories)="displaySubCategories($event)"></app-categories>
+</mat-sidenav>
+
+<mat-sidenav-content [style.background-image]="'url('+image+')'" >
+<span class="header-container">
+<button class="btn-info nav-bar-btn" [(ngModel)]="opened" name="sideBarOpener" ngDefaultControl (click)="toggleSideBar()">קטגוריות</button>
+<label class="current-category-header" *ngIf="currentCategory">
+קטגוריה נוכחית: {{currentCategory.name}}</label>
+<mat-icon class="logout-btn" title="התנתקות מהמערכת" (click)="logout()">logout</mat-icon>
+</span>
+<app-sub-categories (displayMsg)="displayMsg($event)" [category]="currentCategory"></app-sub-categories>
+</mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,67 @@
+<div class="mat-drawer-container" [style.background-image]="'url('+image+')'">
+  <app-msg *ngIf="msg" [msg]="msg"></app-msg>
+<mat-card class="login-container " *ngIf="!isAdd" >
+  <mat-card-header>
+    התחברות למערכת
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item>
+    <mat-form-field>
+      <mat-label>שם משתמש</mat-label>
+    <input matInput [(ngModel)]="currentUser.userName"/>
+  </mat-form-field>
+</mat-list-item>
+<mat-list-item>
+  <mat-form-field>
+    <mat-label>סיסמא</mat-label>
+  <input type="password" matInput [(ngModel)]="currentUser.password"/>
+</mat-form-field>
+</mat-list-item>
+<mat-list-item>
+  <button class="btn btn-warning" (click)="login()">התחברות</button>
+</mat-list-item>
+<mat-list-item>
+  <label class="register-href"(click)="isAdd = true">לא רשום? לחץ כאן כדי להירשם</label>
+</mat-list-item>
+  </mat-list>
+  </mat-card-content>
+</mat-card>
+<mat-card class="login-container " *ngIf="isAdd" >
+  <mat-card-header>
+    הרשמות למערכת
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item>
+    <mat-form-field>
+      <mat-label>שם משתמש</mat-label>
+    <input matInput [(ngModel)]="newUser.userName"/>
+  </mat-form-field>
+</mat-list-item>
+<mat-list-item>
+  <mat-form-field>
+    <mat-label>סיסמא</mat-label>
+  <input type="password" matInput [(ngModel)]="newUser.password"/>
+</mat-form-field>
+</mat-list-item>
+<mat-list-item>
+  <mat-form-field>
+    <mat-label>אימייל</mat-label>
+  <input  matInput [(ngModel)]="newUser.email"/>
+</mat-form-field>
+</mat-list-item>
+<mat-list-item>
+  <mat-form-field>
+    <mat-label>שם מלא</mat-label>
+  <input  matInput [(ngModel)]="newUser.name"/>
+</mat-form-field>
+</mat-list-item>
+<mat-list-item>
+  <button class="btn btn-warning" (click)="add()">הרשם</button>
+  <button class="btn btn-warning" (click)="isAdd = false">חזור</button>
+</mat-list-item>
+  </mat-list>
+  </mat-card-content>
+</mat-card>
+</div>
